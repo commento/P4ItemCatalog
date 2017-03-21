@@ -116,9 +116,7 @@ def gconnect():
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
-
-    print(login_session['user_id'])
-
+    
     output = ''
     output += '<h1>Welcome, '
     output += login_session['username']
@@ -220,7 +218,6 @@ def newRestaurant():
         newRestaurant = Restaurant(
             name=request.form['name'], user_id=login_session['user_id'])
         session.add(newRestaurant)
-        print(login_session['user_id'])
         flash('New Restaurant %s Successfully Created' % newRestaurant.name)
         session.commit()
         return redirect(url_for('showRestaurants'))
@@ -286,7 +283,7 @@ def newMenuItem(restaurant_id):
     if 'username' not in login_session:
         return redirect('/login')
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    
+
     if login_session['user_id'] != restaurant.user_id:
         return "<script>function myFunction() {alert('You are not authorized to add menu items to this restaurant. Please create your own restaurant in order to add items.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
