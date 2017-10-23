@@ -1,4 +1,4 @@
-#P4 Item Catalog project
+P4 Item Catalog project
 =============
 
 Required tools:
